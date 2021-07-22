@@ -1,0 +1,6 @@
+<form #form="ngForm" (ngSubmit)="onSubmit()">
+  <input type="text" name="fullName" required minlength="5" [(ngModel)]="fullName">
+  <input type="text" name="address" required minlength="10" [(ngModel)]="address">
+  <input type="number" name="creditCard" required minlength="12" [(ngModel)]="creditCard">
+  <input type="submit" class="btn btn-primary" [disabled]="form.invalid" value="Checkout">
+</form>

@@ -1,0 +1,31 @@
+<div *ngIf="isCartNotEmpty()">
+  <h1>Your shopping cart</h1>
+  <div class="cart-container">
+    <div class="cart-panel">
+      <div class="cart-item-details" *ngFor="let cartItem of cartItemList">
+        <div class="cart-item">
+          <div>
+            <img src="{{ cartItem.product.url }}" alt="">
+          </div>
+          <div>
+            <p>{{ cartItem.product.name }}</p>
+            <p>{{ cartItem.product.description }}</p>
+            <p>{{ cartItem.quantity }}</p>
+            <p>{{ cartItem.product.price }}</p>
+            <p>${{ cartItem.quantity * cartItem.product.price }}</p>
+            <app-quantity-input [product]="cartItem.product"></app-quantity-input>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cart-panel">
+      <app-customer-form></app-customer-form>
+    </div>
+  </div>
+</div>
+<div *ngIf="!isCartNotEmpty()" class="empty-cart">
+  <h1>Your shopping cart is empty</h1>
+  <a routerLink="/">Return to product list</a>
+</div>
+
+
