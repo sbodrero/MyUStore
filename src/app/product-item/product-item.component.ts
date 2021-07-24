@@ -21,6 +21,7 @@ export class ProductItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // do nothing.
   }
 
   receiveMessage(message: string): void {

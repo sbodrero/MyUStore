@@ -30,6 +30,7 @@ export class QuantityInputComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // do nothing.
   }
 
   ngOnChanges(): void {
