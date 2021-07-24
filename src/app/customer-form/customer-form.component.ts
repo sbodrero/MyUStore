@@ -19,6 +19,7 @@ export class CustomerFormComponent implements OnInit {
  }
 
   ngOnInit(): void {
+    // do nothing.
   }
 
   onSubmit(): void {

@@ -98,9 +98,25 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          },
+          "extends": [
+            "tslint:recommended",
+            "@angular-extensions/lint-rules"
+          ]
         }
       }
     }
   },
-  "defaultProject": "MyUStore"
+  "defaultProject": "MyUStore",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }
