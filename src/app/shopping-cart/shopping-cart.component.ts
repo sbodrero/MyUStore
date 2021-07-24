@@ -59,4 +59,9 @@ export class ShoppingCartComponent implements OnInit {
       self.message = '';
     }, 3000);
   }
+
+  getProductPriceByQuantity(quantity: number, price: number): number {
+    const returnValue = (quantity * price);
+    return parseFloat(returnValue.toFixed(2));
+  }
 }

@@ -15,12 +15,12 @@
             <p>{{ cartItem.product.description }}</p>
             <p>{{ cartItem.quantity }}</p>
             <p>{{ cartItem.product.price }}</p>
-            <p>${{ cartItem.quantity * cartItem.product.price }}</p>
+            <p>${{ getProductPriceByQuantity(cartItem.quantity, cartItem.product.price) }}</p>
             <app-quantity-input [product]="cartItem.product" (added)="receiveMessage($event)"></app-quantity-input>
           </div>
         </div>
       </div>
-      <div>Total price ${{ totalCart()}}</div>
+      <div class="total-cart">Total price ${{ totalCart()}}</div>
     </div>
     <div class="cart-panel">
       <app-customer-form (customerAdded)="receiveCustomer($event)"></app-customer-form>

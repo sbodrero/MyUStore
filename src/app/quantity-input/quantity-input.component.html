@@ -1,6 +1,6 @@
 <form #form="ngForm" (ngSubmit)="onSubmit()">
   <div *ngIf="!showSelect()">
-    <input type="number" name="quantity" [(ngModel)]="quantity" (ngModelChange)="onQuantityChange($event)" />
+    <input type="number" class="number-input" name="quantity" [(ngModel)]="quantity" (ngModelChange)="onQuantityChange($event)" />
   </div>
   <select *ngIf="showSelect()" class="select-input" name="quantity" [(ngModel)]="quantity" required>
     <option value="0">Quantity</option>

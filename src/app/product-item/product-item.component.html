@@ -1,8 +1,7 @@
-<div class="product-container">
-  <a routerLink="/product/{{ product.id }}">
-    <img class="product-image" src="{{ product.url }}" alt="" />
-  </a>
-  <p>{{ product.name }}</p>
-  <p>${{ product.price }}</p>
-  <app-quantity-input [product]="product" (added)="receiveMessage($event)" [select]="true"></app-quantity-input>
-</div>
+<a routerLink="/product/{{ product.id }}">
+  <img class="product-image" src="{{ product.url }}" alt="" />
+</a>
+<p>{{ product.name }}</p>
+<p>${{ product.price }}</p>
+<app-quantity-input [product]="product" (added)="receiveMessage($event)" [select]="true"></app-quantity-input>
+

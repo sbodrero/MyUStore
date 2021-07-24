@@ -1,14 +1,18 @@
 .product-index {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  max-width: 1024px;
-  margin-bottom: 64px;
+}
+
+.product-index>* {
+  flex: 1 1 160px;
+  flex-basis: 33%;
 }
 
 .product-container {
+  margin-top: 64px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .alert {
