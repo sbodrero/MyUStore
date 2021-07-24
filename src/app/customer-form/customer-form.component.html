@@ -1,6 +1,43 @@
 <form #form="ngForm" (ngSubmit)="onSubmit()">
-  <input type="text" name="fullName" required minlength="5" [(ngModel)]="fullName">
-  <input type="text" name="address" required minlength="10" [(ngModel)]="address">
-  <input type="number" name="creditCard" required minlength="12" [(ngModel)]="creditCard">
+  <label for="fullName">Full name</label>
+  <input type="text" name="fullName" id="fullName" required minlength="5" [(ngModel)]="customer.fullName" #CustomerFullName="ngModel">
+  <div *ngIf="CustomerFullName.invalid && (CustomerFullName.dirty || CustomerFullName.touched)" class="alert-errors">
+    <div *ngIf="CustomerFullName.errors?.required">
+      Please provide your full name.
+    </div>
+    <div *ngIf="CustomerFullName.errors?.minlength">
+      Your full name must contain at least 5 characters.
+    </div>
+  </div>
+  <label for="address">Address</label>
+  <input type="text" name="address" id="address" required minlength="10" [(ngModel)]="customer.address" #CustomerAddress="ngModel">
+  <div *ngIf="CustomerAddress.invalid && (CustomerAddress.dirty || CustomerAddress.touched)" class="alert-errors">
+    <div *ngIf="CustomerAddress.errors?.required">
+      Please provide your address.
+    </div>
+    <div *ngIf="CustomerAddress.errors?.minlength">
+      Your address must contain at least 10 characters.
+    </div>
+  </div>
+  <label for="creditCard">CreditCard number</label>
+  <input
+    type="text"
+    name="creditCard"
+    id="creditCard"
+    required
+    minlength="12"
+    [(ngModel)]="customer.creditCard"
+    #CustomerCreditCard="ngModel"
+    (keypress)="numberOnly($event)"
+  >
+  <div *ngIf="CustomerCreditCard.invalid && (CustomerCreditCard.dirty || CustomerCreditCard.touched)" class="alert-errors">
+    <div *ngIf="CustomerCreditCard.errors?.required">
+      Please provide your card number.
+    </div>
+    <div *ngIf="CustomerCreditCard.errors?.minlength">
+      Your card number must contain at least 13 characters.
+    </div>
+  </div>
   <input type="submit" class="btn btn-primary" [disabled]="form.invalid" value="Checkout">
 </form>
+

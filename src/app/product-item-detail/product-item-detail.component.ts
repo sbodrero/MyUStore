@@ -10,6 +10,8 @@ import { ProductService } from "../services/product/product.service";
 })
 export class ProductItemDetailComponent implements OnInit {
   product: Product;
+  message: string = '';
+
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService) {
@@ -17,7 +19,7 @@ export class ProductItemDetailComponent implements OnInit {
       id: 1,
       name: 'First product',
       price: 10,
-      url: 'http://product',
+      url: '',
       description: 'To avoid class error'
     };
   }
@@ -26,9 +28,18 @@ export class ProductItemDetailComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       if (id) {
-        this.product  = this.productService.getProductById(parseInt(id));
+        this.productService.getProductById(parseInt(id)).subscribe(product => {
+          this.product = product;
+        });
       }
     });
   }
 
+  receiveMessage(message: string): void {
+    this.message = message;
+    const self = this;
+    setTimeout(function() {
+      self.message = '';
+    }, 3000);
+  }
 }

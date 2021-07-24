@@ -11,6 +11,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { ProductItemDetailComponent } from './product-item-detail/product-item-detail.component';
 import { QuantityInputComponent } from './quantity-input/quantity-input.component';
 import { CustomerFormComponent } from './customer-form/customer-form.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,12 +22,13 @@ import { CustomerFormComponent } from './customer-form/customer-form.component';
     NavBarComponent,
     ProductItemDetailComponent,
     QuantityInputComponent,
-    CustomerFormComponent
+    CustomerFormComponent,
   ],
     imports: [
         BrowserModule,
         AppRoutingModule,
-        FormsModule
+        FormsModule,
+        HttpClientModule
     ],
   providers: [],
   bootstrap: [AppComponent]

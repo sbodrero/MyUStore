@@ -1,10 +1,13 @@
+<div *ngIf="message !=''" class="alert">
+  {{ message }}
+</div>
 <div class="detail-container">
-  <img src="{{ product.url }}" alt="" class="product-image">
+  <img src="{{ product?.url }}" alt="" class="product-image">
   <div class="detail-item">
-    <h1>{{ product.name }}</h1>
-    <p>{{ product.description }}</p>
-    <p>{{ product.price }}</p>
-    <app-quantity-input [product]="product"></app-quantity-input>
+    <h1>{{ product?.name }}</h1>
+    <p>{{ product?.description }}</p>
+    <p>{{ product?.price }}</p>
+    <app-quantity-input [product]="product" (added)="receiveMessage($event)" [select]="true"></app-quantity-input>
     <a routerLink="/" class="back-link">Return to product list</a>
   </div>
 </div>

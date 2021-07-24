@@ -1,4 +1,7 @@
-<div *ngIf="isCartNotEmpty()">
+<div *ngIf="message !=''" class="alert">
+  {{ message }}
+</div>
+<div *ngIf="cartNotChecked()">
   <h1>Your shopping cart</h1>
   <div class="cart-container">
     <div class="cart-panel">
@@ -13,19 +16,26 @@
             <p>{{ cartItem.quantity }}</p>
             <p>{{ cartItem.product.price }}</p>
             <p>${{ cartItem.quantity * cartItem.product.price }}</p>
-            <app-quantity-input [product]="cartItem.product"></app-quantity-input>
+            <app-quantity-input [product]="cartItem.product" (added)="receiveMessage($event)"></app-quantity-input>
           </div>
         </div>
       </div>
+      <div>Total price ${{ totalCart()}}</div>
     </div>
     <div class="cart-panel">
-      <app-customer-form></app-customer-form>
+      <app-customer-form (customerAdded)="receiveCustomer($event)"></app-customer-form>
     </div>
   </div>
 </div>
-<div *ngIf="!isCartNotEmpty()" class="empty-cart">
+<div *ngIf="isCartEmpty()" class="empty-cart">
   <h1>Your shopping cart is empty</h1>
   <a routerLink="/">Return to product list</a>
+</div>
+<div *ngIf="showSuccessMessage()" class="success-message">
+  <h1>Success</h1>
+  <p>Thank you {{ customer.fullName }}</p>
+  <p>Your {{ totalCart() }} order is confirmed</p>
+  <a class="btn btn-primary" routerLink="/">back to products list</a>
 </div>
 
 

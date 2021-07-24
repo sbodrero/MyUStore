@@ -50,9 +50,19 @@ h1 {
 
 p {
   padding-left: 10px;
-  margin-bottom: 0px;
+  margin-top: 0px !important;
+  margin-bottom: 2px !important;
 }
 
 .empty-cart {
   text-align: center;
+}
+
+.alert {
+  margin-top: 10px;
+  padding: 10px 10px;
+  text-align: center;
+  background-color: greenyellow;
+  color: black;
+  font-size: 20px;
 }

@@ -1,7 +1,7 @@
 export class Customer {
   fullName: string;
   address: string;
-  creditCard: number;
+  creditCard: string;
 
   constructor(obj?: any) {
     this.fullName = obj && obj.fullName || null;

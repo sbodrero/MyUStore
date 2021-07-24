@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Product } from "../models/product/product.model";
 import { CartService } from "../services/cart/cart.service";
 import { CartItem } from "../models/cart-item/cart-item.model";
@@ -10,22 +10,29 @@ import { CartItem } from "../models/cart-item/cart-item.model";
 })
 export class QuantityInputComponent implements OnInit {
   @Input() product: Product;
+  @Input() select: boolean = false;
+  @Output() added: EventEmitter<string> = new EventEmitter();
   quantity: number;
+  errorMessage: string;
   message: string;
 
   constructor(private cartService: CartService) {
+    this.quantity = 0;
+    this.errorMessage = "";
+    this.message = "";
     this.product = {
       id: 1,
       name: 'First product',
       price: 10,
-      url: 'http://product',
+      url: '',
       description: 'To avoid class error'
     };
-    this.quantity = 0;
-    this.message = "";
   }
 
   ngOnInit(): void {
+  }
+
+  ngOnChanges(): void {
     this.quantity = this.cartService.getCartItemQuantity(this.product);
   }
 
@@ -35,13 +42,30 @@ export class QuantityInputComponent implements OnInit {
       quantity: this.quantity
     }
     if(this.quantity == 0) {
-      this.message = "Min quantity is 1";
+      this.errorMessage = "Min quantity is 1";
     }
     else {
-      this.message = "";
+      this.errorMessage = "";
       this.cartService.addOrUpdateItem(cartItem);
-      alert("Product added to cart")
+      this.added.emit("Product added to cart");
     }
   }
 
+  showSelect(): boolean {
+    return this.select == true;
+  }
+
+  onQuantityChange(value: number): void {
+    const cartItem: CartItem = {
+      product: this.product,
+      quantity: value
+    }
+    if(value == 0) {
+      this.cartService.removeItem(cartItem);
+      this.added.emit("Product removed from cart");
+    } else {
+      this.cartService.addOrUpdateItem(cartItem);
+      this.added.emit("Cart updated");
+    }
+  }
 }

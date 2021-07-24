@@ -1,5 +1,8 @@
 <form #form="ngForm" (ngSubmit)="onSubmit()">
-  <select class="select-input" name="quantity" [(ngModel)]="quantity" required>
+  <div *ngIf="!showSelect()">
+    <input type="number" name="quantity" [(ngModel)]="quantity" (ngModelChange)="onQuantityChange($event)" />
+  </div>
+  <select *ngIf="showSelect()" class="select-input" name="quantity" [(ngModel)]="quantity" required>
     <option value="0">Quantity</option>
     <option value="1">1</option>
     <option value="2">2</option>
@@ -12,7 +15,6 @@
     <option value="9">9</option>
     <option value="10">10</option>
   </select>
-  <p class="message">{{ message }}</p>
+  <p class="message">{{ errorMessage }}</p>
   <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Add to cart</button>
 </form>
-

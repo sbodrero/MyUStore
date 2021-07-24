@@ -11,14 +11,16 @@ import { Customer } from "../models/customer/customer.model";
 })
 export class ShoppingCartComponent implements OnInit {
   cartItemList: CartItem[];
-  @Output() customer: Customer;
+  submitted: boolean = false;
+  customer: Customer;
+  message: string = '';
 
   constructor(private cartService: CartService) {
     this.cartItemList = []
     this.customer = {
-      fullName: '',
-      address: '',
-      creditCard: 0
+      fullName: "",
+      address: "",
+      creditCard: ""
     }
   }
 
@@ -26,7 +28,35 @@ export class ShoppingCartComponent implements OnInit {
     this.cartItemList = this.cartService.getCartItemList();
   }
 
-  isCartNotEmpty(): boolean {
-    return !_.isEmpty(this.cartItemList);
+  isCartEmpty(): boolean {
+    return _.isEmpty(this.cartItemList);
+  }
+
+  totalCart() {
+    return this.cartItemList.reduce((total: number, item) => {
+      total += item.quantity * item.product.price;
+      return total;
+    }, 0).toFixed(2)
+  }
+
+  receiveCustomer(customer: Customer): void {
+    this.customer = customer;
+    this.submitted = true;
+  }
+
+  cartNotChecked(): boolean {
+    return !_.isEmpty(this.cartItemList) && !this.submitted;
+  }
+
+  showSuccessMessage() {
+    return this.submitted === true;
+  }
+
+  receiveMessage(message: string): void {
+    this.message = message;
+    const self = this;
+    setTimeout(function() {
+      self.message = '';
+    }, 3000);
   }
 }

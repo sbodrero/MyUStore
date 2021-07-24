@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Customer } from "../models/customer/customer.model";
+
 
 @Component({
   selector: 'app-customer-form',
@@ -7,20 +8,31 @@ import { Customer } from "../models/customer/customer.model";
   styleUrls: ['./customer-form.component.css']
 })
 export class CustomerFormComponent implements OnInit {
-  fullName: string;
-  address: string;
-  creditCard: number;
+  @Output() customerAdded: EventEmitter<Customer> = new EventEmitter();
+  customer: Customer;
   constructor() {
-    this.fullName = "George Lamaître",
-    this.address = "17 rue de la pompe 44000 Nantes",
-    this.creditCard = 1000000000000
+    this.customer = {
+      fullName: "",
+      address: "",
+      creditCard: ""
+    }
  }
 
   ngOnInit(): void {
   }
 
   onSubmit(): void {
+    const customer: Customer = this.customer;
+    this.customerAdded.emit(customer);
+  }
 
+  // @ts-ignore
+  numberOnly(event): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
   }
 
 }
