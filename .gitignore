@@ -47,3 +47,4 @@ Thumbs.db
 #servers
 
 server/node_modules
+server/.idea
